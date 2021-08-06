@@ -2,4 +2,4 @@ logs/.mvn
 logs/mvnw*
 logs/target/
 logs/nbactions*
-logs/logs/
+logs/logs/*
