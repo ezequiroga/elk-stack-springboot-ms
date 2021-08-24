@@ -29,9 +29,8 @@ services:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
 
-
   logstash:
-    image: logstash:7.13.4
+    image: logstash
     container_name: logstash
     build:
         context: logstash/.
@@ -39,6 +38,17 @@ services:
     ports:
         - "9600:9600"
         - "8089:8089"
+        - "5044:5044"
+
+  filebeat:
+    image: filebeat
+    container_name: filebeat
+    build:
+        context: filebeat/.
+        dockerfile: Dockerfile
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /var/log/app/:/home/
   
   micrologs:
     image: micrologs:latest
@@ -49,6 +59,20 @@ services:
         dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+  
+  fastapi:
+    image: fastapilogs
+    container_name: fastapilogs
+    build:
+        context: ./fastapi
+        dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /var/log/app/:/app/logs/
         
 volumes:
   data01:

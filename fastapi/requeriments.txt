@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pydicom
+python-dotenv
+fastapi-route-logger-middleware
+prometheus-fastapi-instrumentator
