@@ -1,5 +1,8 @@
 filebeat.inputs:
 - type: log
+  fields:
+    source: "fastapi"    
+  tags: ["microservices", "elk"]
   paths:
     - "/home/*"
 
